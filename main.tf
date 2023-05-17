@@ -16,10 +16,12 @@ resource "aws_s3_bucket_website_configuration" "bucket" {
   }
 }
 
-resource "aws_s3_bucket_acl" "bucket" {
+resource "aws_s3_bucket_ownership_controls" "example" {
   bucket = aws_s3_bucket.bucket.id
 
-  acl = "public-read"
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
 }
 
 resource "aws_s3_bucket_policy" "policy" {
